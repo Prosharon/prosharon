@@ -1,6 +1,8 @@
 "use client"; // This ensures the component is rendered on the client side
 
 import { useState, useEffect } from "react";
+import { TbMoon } from "react-icons/tb";
+import { TbSunHigh } from "react-icons/tb";
 
 export default function DarkModeToggle() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
@@ -41,9 +43,9 @@ export default function DarkModeToggle() {
 	return (
 		<button
 			onClick={toggleDarkMode}
-			className="p-2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-md"
+			className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white rounded-md"
 		>
-			{isDarkMode ? "Light Mode" : "Dark Mode"}
+			{isDarkMode ? <TbMoon /> : <TbSunHigh />}
 		</button>
 	);
 }
