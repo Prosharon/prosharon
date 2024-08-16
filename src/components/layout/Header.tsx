@@ -57,7 +57,7 @@ const Header = () => {
 						<li>
 							<a
 								href="#"
-								className="block py-2 px-3 text-gray-900 rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white md:dark:hover:bg-transparent"
+								className="block py-2 px-3 rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white"
 							>
 								Login/Signup
 							</a>
