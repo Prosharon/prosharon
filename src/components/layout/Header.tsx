@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import DarkModeToggle from "../ui/DarkModeToggle";
 
 const Header = () => {
@@ -55,12 +56,12 @@ const Header = () => {
 							<DarkModeToggle/>
 						</li>
 						<li>
-							<a
-								href="#"
+							<Link
+								href="/login"
 								className="block py-2 px-3 rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white"
 							>
 								Login/Signup
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>

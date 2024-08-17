@@ -1,4 +1,4 @@
-"use client"; // This ensures the component is rendered on the client side
+"use client";
 
 import { useState, useEffect } from "react";
 import { TbMoon } from "react-icons/tb";
