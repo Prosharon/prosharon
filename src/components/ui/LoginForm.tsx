@@ -1,8 +1,10 @@
 "use client";
 import { firebaseAuthClient, authClient } from "@/services/authService";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+	const router = useRouter();
 	const authClient: authClient = new firebaseAuthClient();
 	const submitHandler = async (e: any) => {
 		e.preventDefault();
@@ -11,7 +13,11 @@ const LoginForm = () => {
 		const password = (
 			document.getElementById("password") as HTMLInputElement
 		).value;
-		await authClient.signIn(email, password);
+		await authClient.signIn(email, password).then(()=> {
+			router.push("/");
+		}).catch((error)=>{
+			alert("Error: " + error);
+		});
 	};
 	return (
 		<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

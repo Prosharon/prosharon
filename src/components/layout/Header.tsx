@@ -1,8 +1,31 @@
-'use client'
+"use client";
 import Link from "next/link";
 import DarkModeToggle from "../ui/DarkModeToggle";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "@/services/firebase";
+import { useState } from "react";
+import { useRouter } from 'next/navigation'
+
 
 const Header = () => {
+	const [user, setUser] = useState<any>(null);
+	const router = useRouter()
+	onAuthStateChanged(auth, (user) => {
+		if (user) {
+			setUser(user);
+		}else{
+			setUser(null);
+		}
+	});
+
+	const signOutUser = () => {
+		signOut(auth).then(()=> {
+			router.push("/login");
+		}).catch((error) => {
+			alert("Error: " + error);
+		})
+	}
+
 	return (
 		<nav className="bg-white border-gray-200 dark:bg-gray-900">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-6">
@@ -53,16 +76,17 @@ const Header = () => {
 				>
 					<ul className="flex flex-col items-center p-4 md:p-0 mt-4 border border-gray-300 rounded-lg bg-gray-100 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 						<li>
-							<DarkModeToggle/>
+							<DarkModeToggle />
 						</li>
 						<li>
 							<Link
 								href="/login"
-								className="block py-2 px-3 rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white"
+								className="block rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white"
 							>
-								Login/Signup
+								{user ? user.displayName : "Login/Signup"}
 							</Link>
 						</li>
+						{user? <li><p onClick={signOutUser} className="block rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white hover:cursor-pointer">Logout</p></li>:""}
 					</ul>
 				</div>
 			</div>

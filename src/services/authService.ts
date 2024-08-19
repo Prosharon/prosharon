@@ -1,8 +1,9 @@
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
+	updateProfile,
 } from "firebase/auth";
-import {auth, firestore} from "./firebase";
+import { auth, firestore } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 interface authClient {
@@ -16,13 +17,15 @@ class firebaseAuthClient implements authClient {
 		password: string,
 		fullName: string
 	): Promise<void> {
-		console.log(email, password, fullName);
 		try {
 			const userCredential = await createUserWithEmailAndPassword(
 				auth,
 				email,
 				password
 			);
+			const user = userCredential.user;
+
+			await updateProfile(user, { displayName: fullName });
 
 			console.log("User signed up and profile updated:", user);
 		} catch (error) {
@@ -31,7 +34,7 @@ class firebaseAuthClient implements authClient {
 		}
 	}
 
-	async signIn (email:string, password:string): Promise<void> {
+	async signIn(email: string, password: string): Promise<void> {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				// Signed in
@@ -43,7 +46,7 @@ class firebaseAuthClient implements authClient {
 				const errorMessage = error.message;
 				console.log(errorCode, errorMessage);
 			});
-	};
+	}
 }
 
 export type { authClient };

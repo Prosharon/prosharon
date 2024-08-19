@@ -1,8 +1,10 @@
 'use client';
 import {firebaseAuthClient, authClient } from "@/services/authService";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+	const router = useRouter();
 	const authClient: authClient = new firebaseAuthClient(); 
 	const submitHandler = async (e: any) => {
 		e.preventDefault();
@@ -16,7 +18,11 @@ const RegisterForm = () => {
 			alert("Passwords do not match");
 			return;
 		}
-		await authClient.signUp(email, password, fullName);
+		await authClient.signUp(email, password, fullName).then(() => {
+			router.push('/login');
+		}).catch((error)=>{
+			alert("Error: " + error);
+		});
 	}
 	return (
 		<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
