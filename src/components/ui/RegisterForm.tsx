@@ -19,7 +19,7 @@ const RegisterForm = () => {
 			return;
 		}
 		await authClient.signUp(email, password, fullName).then(() => {
-			router.push('/login');
+			router.push('/');
 		}).catch((error)=>{
 			alert("Error: " + error);
 		});
