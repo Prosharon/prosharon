@@ -1,7 +1,18 @@
+'use client';
 import LoginForm from "@/components/ui/LoginForm";
-import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const page = () => {
+	const { user, loading } = useAuth();
+	const router = useRouter();
+	useEffect(() => {
+		if (user?.uid) {
+			router.push('/');
+		}
+	  }, [loading]);
+	if (loading) return <div>loading...</div>;
 	return (
 		<section className="bg-gray-50 dark:bg-gray-900">
 			<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

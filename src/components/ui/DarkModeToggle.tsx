@@ -41,11 +41,13 @@ export default function DarkModeToggle() {
 	};
 
 	return (
+		<div className="flex">
 		<button
 			onClick={toggleDarkMode}
 			className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white rounded-md"
 		>
 			{isDarkMode ? <TbMoon /> : <TbSunHigh />}
 		</button>
+		</div>
 	);
 }

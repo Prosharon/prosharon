@@ -2,36 +2,23 @@
 import Link from "next/link";
 import DarkModeToggle from "../ui/DarkModeToggle";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "@/services/firebase";
+import { auth, firestore } from "@/services/firebase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import HeaderDropdown from "../ui/HeaderDropdown";
+import { doc, getDoc } from "firebase/firestore";
+import { TbTableRow } from "react-icons/tb";
+import { TbMenu2 } from "react-icons/tb";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
-	const [user, setUser] = useState<any>(null);
-	const router = useRouter();
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-			setUser(user);
-		} else {
-			setUser(null);
-		}
-	});
-
-	const signOutUser = () => {
-		signOut(auth)
-			.then(() => {
-				router.push("/login");
-			})
-			.catch((error) => {
-				alert("Error: " + error);
-			});
-	};
+	const { profile, user, loading } = useAuth();
 
 	return (
-		<nav className="bg-white border-gray-200 dark:bg-gray-900">
+		<nav className="bg-white border-gray-200 dark:bg-gray-900 font-semibold">
 			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-6">
 				<a
-					href="https://flowbite.com/"
+					href="#"
 					className="flex items-center space-x-3 rtl:space-x-reverse"
 				>
 					<img
@@ -55,30 +42,17 @@ const Header = () => {
 					aria-expanded="false"
 				>
 					<span className="sr-only">Open main menu</span>
-					<svg
-						className="w-5 h-5"
-						aria-hidden="true"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 17 14"
-					>
-						<path
-							stroke="currentColor"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="2"
-							d="M1 1h15M1 7h15M1 13h15"
-						/>
-					</svg>
+					<TbMenu2 />
 				</button>
 				<div
 					className="hidden w-full md:block md:w-auto"
 					id="navbar-default"
 				>
-					<ul className="flex flex-col items-center p-4 md:p-0 mt-4 border border-gray-300 rounded-lg bg-gray-100 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+					<ul className="flex flex-col space-y-1 items-center p-4 md:p-0 mt-4 border border-gray-300 rounded-lg bg-gray-100 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 						<li>
 							<DarkModeToggle />
 						</li>
+						{profile?.role !=="teacher" ? "" : <li className="bg-azure text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 hover:cursor-pointer"><Link href="/console" className="flex items-center gap-1"><TbTableRow /> Console</Link></li>}
 						{!user ? (
 							<li>
 								<Link
@@ -89,13 +63,8 @@ const Header = () => {
 								</Link>
 							</li>
 						) : (
-							<li>
-								<p
-									onClick={signOutUser}
-									className="block rounded md:border-0 text-azure md:hover:text-black md:p-0 md:dark:hover:text-white hover:cursor-pointer"
-								>
-									{user.displayName}
-								</p>
+							<li className="relative">
+								<HeaderDropdown user={user.displayName} />
 							</li>
 						)}
 					</ul>
