@@ -7,7 +7,7 @@ interface props {
 
 const HeaderMobile = ({toggleSidebar}: props) => {
 	return (
-		<header className="bg-gray-200 dark:bg-gray-800 p-4 md:hidden relative">
+		<header className="bg-gray-200 dark:bg-gray-700 p-4 md:hidden relative">
 			<button
 				onClick={toggleSidebar}
 				className="p-2 rounded-md bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-white"

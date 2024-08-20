@@ -1,5 +1,5 @@
 import {
-	TbDeviceAnalytics,
+	TbChalkboard,
 	TbLayoutDashboard,
 	TbSettings,
 	TbUser,
@@ -13,19 +13,21 @@ interface props {
 	toggleSidebar: () => void;
 }
 
-const Sidebar = ({sidebarOpen, toggleSidebar}:props) => {
+const Sidebar = ({ sidebarOpen, toggleSidebar }: props) => {
 	const pathname = usePathname();
 	return (
 		<div
-			className={`fixed inset-y-0 left-0 w-64 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white transition-transform duration-300 ease-in-out ${
+			className={`fixed inset-y-0 left-0 w-48 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white transition-transform duration-300 ease-in-out ${
 				sidebarOpen ? "translate-x-0" : "-translate-x-full"
 			} md:translate-x-0 z-40`}
 		>
-			<div className="flex flex-col h-full p-4">
-				<header className="flex items-center justify-between mb-6">
-					<h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-						Prosharon
-					</h1>
+			<div className="flex flex-col h-full px-4 py-8">
+				<header className="flex items-center md:justify-center justify-between mb-6">
+					<img
+						className="w-8 h-8 mr-2"
+						src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+						alt="logo"
+					/>
 					<button
 						onClick={toggleSidebar}
 						className="p-2 md:hidden rounded-md bg-gray-300 dark:bg-gray-700"
@@ -45,12 +47,17 @@ const Sidebar = ({sidebarOpen, toggleSidebar}:props) => {
 						</svg>
 					</button>
 				</header>
-				<nav className="flex-grow">
+				<nav className="flex-grow flex flex-col justify-center">
 					<ul className="space-y-2">
 						<li>
 							<Link
 								href="/console/dashboard"
-								className={"flex items-center py-2 px-4 rounded font-semibold " + (!pathname.endsWith("dashboard")? "hover:bg-gray-200 dark:hover:bg-gray-700" : "bg-azure text-white shadow-md scale-105")}
+								className={
+									"flex items-center py-2 px-4 rounded font-semibold " +
+									(!pathname.endsWith("dashboard")
+										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										: "bg-azure text-white shadow-md scale-105")
+								}
 							>
 								<TbLayoutDashboard className="mr-2" />
 								Dashboard
@@ -58,17 +65,27 @@ const Sidebar = ({sidebarOpen, toggleSidebar}:props) => {
 						</li>
 						<li>
 							<Link
-								href="/console/analytics"
-								className={"flex items-center py-2 px-4 rounded font-semibold " + (!pathname.endsWith("analytics")? "hover:bg-gray-200 dark:hover:bg-gray-700" : "bg-azure text-white shadow-md scale-105")}
+								href="/console/classrooms"
+								className={
+									"flex items-center py-2 px-4 rounded font-semibold " +
+									(!pathname.endsWith("classrooms")
+										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										: "bg-azure text-white shadow-md scale-105")
+								}
 							>
-								<TbDeviceAnalytics className="mr-2" />
-								Analytics
+								<TbChalkboard className="mr-2" />
+								Classrooms
 							</Link>
 						</li>
 						<li>
 							<Link
 								href="/console/settings"
-								className={"flex items-center py-2 px-4 rounded font-semibold " + (!pathname.endsWith("settings")? "hover:bg-gray-200 dark:hover:bg-gray-700" : "bg-azure text-white shadow-md scale-105")}
+								className={
+									"flex items-center py-2 px-4 rounded font-semibold " +
+									(!pathname.endsWith("settings")
+										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										: "bg-azure text-white shadow-md scale-105")
+								}
 							>
 								<TbSettings className="mr-2" />
 								Settings
@@ -77,7 +94,12 @@ const Sidebar = ({sidebarOpen, toggleSidebar}:props) => {
 						<li>
 							<Link
 								href="/console/users"
-								className={"flex items-center py-2 px-4 rounded font-semibold " + (!pathname.endsWith("users")? "hover:bg-gray-200 dark:hover:bg-gray-700" : "bg-azure text-white shadow-md scale-105")}
+								className={
+									"flex items-center py-2 px-4 rounded font-semibold " +
+									(!pathname.endsWith("users")
+										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										: "bg-azure text-white shadow-md scale-105")
+								}
 							>
 								<TbUser className="mr-2" />
 								Users

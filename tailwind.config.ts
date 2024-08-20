@@ -16,6 +16,10 @@ const config: Config = {
       },
 	  colors: {
         azure: "#299DFF",
+        coral: '#F5A9A9',
+        goldenrod: '#F5F5A9',
+        paleGreen: '#A9F5A9',
+        turquoise: '#A9F5F5',
       },
     },
   },

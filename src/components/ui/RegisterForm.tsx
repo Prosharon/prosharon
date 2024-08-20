@@ -14,7 +14,6 @@ const RegisterForm = () => {
 		const confirmPassword = (document.getElementById("confirmPassword") as HTMLInputElement).value;
 
 		if (password != confirmPassword) {
-			console.log(password, confirmPassword)
 			alert("Passwords do not match");
 			return;
 		}
