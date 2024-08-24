@@ -3,8 +3,8 @@ import {
 	signInWithEmailAndPassword,
 	updateProfile,
 } from "firebase/auth";
-import { auth, firestore } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { auth, functions } from "./firebase";
+import { httpsCallable } from "firebase/functions";
 
 interface authClient {
 	signUp(email: string, password: string, fullName: string): Promise<void>;
@@ -26,6 +26,9 @@ class firebaseAuthClient implements authClient {
 			const user = userCredential.user;
 
 			await updateProfile(user, { displayName: fullName });
+
+			const updateUserProfile = httpsCallable(functions, 'assignStudentRole');
+			await updateUserProfile({uid: user.uid, displayName: fullName}).then((data)=>{console.log(data)}).catch((e)=> console.log(e));
 
 			console.log("User signed up and profile updated:", user);
 		} catch (error) {

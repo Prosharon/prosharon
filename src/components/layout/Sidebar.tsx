@@ -53,9 +53,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }: props) => {
 							<Link
 								href="/console/dashboard"
 								className={
-									"flex items-center py-2 px-4 rounded font-semibold " +
+									"flex items-center py-2 px-4 rounded-lg font-semibold " +
 									(!pathname.endsWith("dashboard")
-										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										? "hover:bg-white dark:hover:bg-gray-700"
 										: "bg-azure text-white shadow-md scale-105")
 								}
 							>
@@ -67,9 +67,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }: props) => {
 							<Link
 								href="/console/classrooms"
 								className={
-									"flex items-center py-2 px-4 rounded font-semibold " +
-									(!pathname.endsWith("classrooms")
-										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+									"flex items-center py-2 px-4 rounded-lg font-semibold " +
+									(!pathname.startsWith("/console/classrooms")
+										? "hover:bg-white dark:hover:bg-gray-700"
 										: "bg-azure text-white shadow-md scale-105")
 								}
 							>
@@ -81,9 +81,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }: props) => {
 							<Link
 								href="/console/settings"
 								className={
-									"flex items-center py-2 px-4 rounded font-semibold " +
+									"flex items-center py-2 px-4 rounded-lg font-semibold " +
 									(!pathname.endsWith("settings")
-										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										? "hover:bg-white dark:hover:bg-gray-700"
 										: "bg-azure text-white shadow-md scale-105")
 								}
 							>
@@ -95,9 +95,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }: props) => {
 							<Link
 								href="/console/users"
 								className={
-									"flex items-center py-2 px-4 rounded font-semibold " +
+									"flex items-center py-2 px-4 rounded-lg font-semibold " +
 									(!pathname.endsWith("users")
-										? "hover:bg-gray-200 dark:hover:bg-gray-700"
+										? "hover:bg-white dark:hover:bg-gray-700"
 										: "bg-azure text-white shadow-md scale-105")
 								}
 							>

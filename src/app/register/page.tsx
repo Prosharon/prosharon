@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-const page = () => {
+const RegisterPage = () => {
 	const { user, loading } = useAuth();
 	const router = useRouter();
 	useEffect(() => {
@@ -33,4 +33,4 @@ const page = () => {
 	);
 };
 
-export default page;
+export default RegisterPage;

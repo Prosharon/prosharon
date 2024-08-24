@@ -1,10 +1,13 @@
+import MyClassrooms from "@/components/ui/console/MyClassrooms";
 import ConsoleCard from "@/components/ui/ConsoleCard";
-import { TbChalkboard, TbChartInfographic, TbGraph } from "react-icons/tb";
+import Link from "next/link";
+import { TbChalkboard, TbGraph } from "react-icons/tb";
 
 const Classrooms = () => {
 	return (
 		<div className="flex gap-6 flex-1 flex-wrap">
 			<div className="flex flex-col gap-6">
+				<Link href="/console/classrooms/create">
 				<ConsoleCard className="w-72 md:w-96">
 					{/* Icon placeholder */}
 					<div className="flex flex-col items-center">
@@ -23,7 +26,7 @@ const Classrooms = () => {
 									height="30"
 									fill="#333"
 									stroke="#8B4513"
-									stroke-width="4"
+									strokeWidth="4"
 									rx="4"
 									ry="4"
 								/>
@@ -47,8 +50,8 @@ const Classrooms = () => {
 									x2="65"
 									y2="25"
 									stroke="#299DFF"
-									stroke-width="4"
-									stroke-linecap="round"
+									strokeWidth="4"
+									strokeLinecap="round"
 								/>
 								<line
 									x1="58"
@@ -56,38 +59,42 @@ const Classrooms = () => {
 									x2="72"
 									y2="17.5"
 									stroke="#299DFF"
-									stroke-width="4"
-									stroke-linecap="round"
+									strokeWidth="4"
+									strokeLinecap="round"
 								/>
 							</svg>
 						</div>
 						{/* Text */}
-						<span className="text-2xl font-bold text-azure">
+						<span className="text-2xl font-bold text-black dark:text-white">
 							Create classroom
 						</span>
 					</div>
 				</ConsoleCard>
-				<ConsoleCard className="flex-1 flex flex-col w-72 md:w-96">
-					<div className="flex items-center gap-2 text-azure">
+				</Link>
+				<ConsoleCard className="flex flex-col gap-4 w-72 md:w-96">
+					<div className="flex items-center gap-2 text-black dark:text-white">
 						<span className="text-3xl font-bold">Statistics</span>
 						<TbGraph className="h-8 w-8" />
 					</div>
 
-					<div className="flex flex-1 items-center">
-						<div className="flex gap-4 flex-wrap flex-1 justify-center text-black">
-							<div className="flex flex-col items-center justify-center font-bold bg-coral md:w-40 md:h-40 w-28 h-28 rounded-xl shrink-0">
+					<div className="flex flex-col gap-4 justify-center text-white">
+						<div className="flex gap-4 flex-1 min-h-36">
+							<div className="flex flex-1 flex-col items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-azure md:w-40 w-28 rounded-xl shrink-0">
 								<p className="text-3xl">29</p>
 								Total
 							</div>
-							<div className="flex flex-col items-center justify-center font-bold bg-goldenrod md:w-40 md:h-40 w-28 h-28 rounded-xl shrink-0">
+
+							<div className="flex flex-col items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-azure md:w-40 w-28 rounded-xl shrink-0">
 								<p className="text-3xl">7</p>
 								Public
 							</div>
-							<div className="flex flex-col items-center justify-center font-bold bg-paleGreen md:w-40 md:h-40 w-28 h-28 rounded-xl shrink-0">
+						</div>
+						<div className="flex gap-4 flex-1 min-h-36">
+							<div className="flex flex-col items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-azure md:w-40 w-28 rounded-xl shrink-0">
 								<p className="text-3xl">5</p>
 								Running
 							</div>
-							<div className="flex flex-col items-center justify-center font-bold bg-turquoise md:w-40 md:h-40 w-28 h-28 rounded-xl shrink-0">
+							<div className="flex flex-col items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 text-azure md:w-40 w-28 rounded-xl shrink-0">
 								<p className="text-3xl">24</p>
 								Idle
 							</div>
@@ -95,12 +102,7 @@ const Classrooms = () => {
 					</div>
 				</ConsoleCard>
 			</div>
-			<ConsoleCard className="flex-1">
-				<div className="flex items-center gap-2 text-azure">
-					<span className="text-3xl font-bold">My classroom(s)</span>
-					<TbChalkboard className="h-8 w-8" />
-				</div>
-			</ConsoleCard>
+			<MyClassrooms/>
 		</div>
 	);
 };

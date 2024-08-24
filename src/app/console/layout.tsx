@@ -39,7 +39,7 @@ const Console = ({children} : props) => {
 				<HeaderMobile toggleSidebar={toggleSidebar} />
 
 				{/* Main content area */}
-				<main className="flex p-8 flex-1">
+				<main className="flex flex-1 p-8">
 					{children}
 				</main>
 			</div>

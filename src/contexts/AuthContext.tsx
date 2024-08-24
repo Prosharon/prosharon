@@ -20,22 +20,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const getUserProfile = async (uid: string) => {
 		const userRef = doc(firestore, "users", uid);
-		const userDoc = await getDoc(userRef);
-		try {
-			setProfile(userDoc.data());
-		} catch (e) {
+		await getDoc(userRef).then((res) => {
+			setProfile(res.data());
+		}).catch((e) => {
 			alert("Error: " + e);
-		}
+		})
 	};
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user?.uid) {
-				setUser(user);
-				getUserProfile(user.uid).then(()=> setLoading(false));
-			} else {
-				setUser(null);
-				setLoading(false);
+			try {
+				if (user?.uid) {
+					setUser(user);
+					getUserProfile(user.uid).then(()=> setLoading(false));
+				} else {
+					setUser(null);
+					setLoading(false);
+				}
+			} catch (e) {
+				alert("Error: " + e);
 			}
 		});
 
