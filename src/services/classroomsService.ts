@@ -1,8 +1,9 @@
-import { collection, getDoc, getDocs, limit, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, query } from "firebase/firestore";
 import { firestore } from "./firebase";
 
 interface dbClient {
 	readInstructorClassrooms(uid: string): Promise<any>;
+	getClassroom(uid:string): Promise<any>;
 }
 
 class firestoreClient implements dbClient {
@@ -23,6 +24,15 @@ class firestoreClient implements dbClient {
 			return classrooms;
 		} catch (e) {
 			alert("Error: " + e);
+		}
+	}
+	async getClassroom(uid: string): Promise<any> {
+		try {
+			const classroomRef = await doc(firestore, "classrooms", uid);
+			const classroom = await getDoc(classroomRef);
+			return classroom.data(); 
+		} catch(e) { 
+			alert ("Error: " + e);
 		}
 	}
 }

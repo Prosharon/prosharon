@@ -37,6 +37,5 @@ next-env.d.ts
 
 #firebase
 /.firebase/
-/functions/
 
 .env

@@ -1,7 +1,7 @@
 import MyClassrooms from "@/components/ui/console/MyClassrooms";
 import ConsoleCard from "@/components/ui/ConsoleCard";
 import Link from "next/link";
-import { TbChalkboard, TbGraph } from "react-icons/tb";
+import { TbGraph } from "react-icons/tb";
 
 const Classrooms = () => {
 	return (

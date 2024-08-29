@@ -1,18 +1,18 @@
 "use client";
 import Link from "next/link";
 import DarkModeToggle from "../ui/DarkModeToggle";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth, firestore } from "@/services/firebase";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import HeaderDropdown from "../ui/HeaderDropdown";
-import { doc, getDoc } from "firebase/firestore";
 import { TbTableRow } from "react-icons/tb";
 import { TbMenu2 } from "react-icons/tb";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
 
 const Header = () => {
 	const { profile, user, loading } = useAuth();
+
+	useEffect(() => {
+		console.log('reloading');
+	}, [])
 
 	return (
 		<nav className="bg-white border-gray-200 dark:bg-gray-900 font-semibold">
