@@ -63,7 +63,7 @@ const ClassroomPage = ({ params }: { params: Params }) => {
 				<ClassroomInfo classroomData={classroomData} />
 				<ClassroomStats />
 			</div>
-			<ClassroomLayout classroomId={classroomData.id}/>
+			<ClassroomLayout classroomId={classroomData.id} classroomLayoutData={classroomData.layout}/>
 		</div>
 	);
 };

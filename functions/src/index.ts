@@ -171,7 +171,7 @@ exports.createClassroom = onCall(
 );
 
 exports.addSectionIfInstructor = onCall(
-	{ region: "asia-southeast1" },
+	{ region: "asia-southeast1", cors: true },
 	async (request: any) => {
 		const { auth, data } = request;
 		const { classroomId, sectionName } = data;
@@ -194,7 +194,7 @@ exports.addSectionIfInstructor = onCall(
 
 			// Check if the teacher is one of the instructors
 			const isInstructor = instructorsSnap.docs.some(
-				(doc:any) => doc.id === teacherId
+				(doc: any) => doc.id === teacherId
 			);
 
 			if (!isInstructor) {
@@ -204,13 +204,14 @@ exports.addSectionIfInstructor = onCall(
 				);
 			}
 
-			// Reference to the specific classroom document
 			const classroomRef = db.collection("classrooms").doc(classroomId);
 
-			// Add the new section to the layout
 			await classroomRef.update({
-				[`layout.${sectionName}`]:
-					admin.firestore.FieldValue.arrayUnion(), // Create a new empty array for the section
+				layout: admin.firestore.FieldValue.arrayUnion({
+					type: "folder",
+					name: sectionName, // This can be dynamically set
+					files: [],
+				}),
 			});
 
 			return {
